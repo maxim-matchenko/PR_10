@@ -1,4 +1,4 @@
-﻿//****************************************************************************
+//****************************************************************************
 //* Практическая работа N10                                                  *
 //* Выполнил: Матченко M.C., группа 2-ИСП-оКФ                                *
 //* Вариант 3                                                                *
@@ -16,11 +16,12 @@ namespace PR_10
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Clear();
             Console.WriteLine("Здравствуйте!");
-            bool select = true;// Флаг для организации многократного выполнения программы
-            while (select)
+            try
             {
-                try
+                string Select;// Переменная для контроля повторного запуска
+                do // внешний цикл для повторного запуска 
                 {
+                    Console.WriteLine("\n--- Новый расчет ---");
                     const int row = 4;// Объявление размеров матрицы (M = 4, N = 3)
                     const int col = 3;
                     int[,] array = new int[row, col];
@@ -85,36 +86,24 @@ namespace PR_10
                     {
                         Console.WriteLine("Нечетных чисел в матрице не обнаружено.");
                     }
+                    Console.Write("\nХотите выполнить программу еще раз? (да - 1/нет - любая клавиша): ");
+                    Select = Console.ReadLine();
                 }
-                // Обработка ошибок с использованием производного класса исключений
-                catch (IndexOutOfRangeException iOOREx)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"\nВозникла ошибка: {iOOREx.Message}");
-                    Console.ForegroundColor = ConsoleColor.Black;
-                }
-                // Обработка ошибок с использованием базового класса исключений
-                catch (Exception ex)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"\nВозникла ошибка: {ex.Message}");
-                    Console.ForegroundColor = ConsoleColor.Black;
-                }
-                // Организация многократного выполнения программы без повторного запуска
-                Console.WriteLine("\nХотите запустить программу еще раз? (y/n):");
-                string answer = Console.ReadLine();
-                if (answer != "y" && answer != "н")
-                {
-                    select = false;
-                }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("Повторный запуск программы...");
-                }
+                while (Select == "1");
             }
-            Console.WriteLine("\nПрограмма завершена. Нажмите Enter для выхода...");
-            Console.ReadLine();
+            catch (IndexOutOfRangeException iOOREx)// Обработка ошибок с использованием производного класса исключений
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"\nВозникла ошибка: {iOOREx.Message}");
+                Console.ForegroundColor = ConsoleColor.Black;
+            }
+            catch (Exception ex) // Обработка ошибок с использованием базового класса исключений
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"\nВозникла ошибка: {ex.Message}");
+                Console.ForegroundColor = ConsoleColor.Black;
+            }
         }
+        
     }
 }
