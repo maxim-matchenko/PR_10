@@ -21,6 +21,7 @@ namespace PR_10
                 string Select;// Переменная для контроля повторного запуска
                 do // внешний цикл для повторного запуска 
                 {
+                    Console.Clear();
                     Console.WriteLine("\n--- Новый расчет ---");
                     const int row = 4; // задание массива
                     const int col = 3;
